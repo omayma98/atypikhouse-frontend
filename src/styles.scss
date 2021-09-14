@@ -1,0 +1,190 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+body {
+   background-color: whitesmoke ;
+  .pager-sec-details h1 {
+    font-size: 40px !important;
+  }
+
+    input.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
+      border: 1px red solid;
+    }
+
+    /* Backgound Colors*/
+    .bg-lightgrey {
+      background-color: lightgrey !important;
+    }
+    .bg-whitesmoke {
+        background-color: whitesmoke !important;
+    }
+    .bg-norepeat {
+      background-repeat: no-repeat !important;
+    }
+    .bg-cover {
+      background-size: cover !important;
+    }
+
+    .text-bold {
+        font-weight: bold !important;
+    }
+    .text-underline {
+        text-decoration: underline !important;;
+    }
+
+  .nav-none .owl-dots {
+    display: none !important;
+  }
+
+    .owl-theme   {
+        .owl-dots{
+            .owl-dot span {
+                margin: 5px 3px;
+            }
+            .owl-dot.active span {
+                width: 20px;
+                background: #ff8500;
+            }
+        }
+            .owl-dot:hover span {
+             background: #869791;
+        }
+
+
+
+        .owl-nav {
+
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            position: absolute;
+            top: calc(50% - 40px);
+            margin-top: 0;
+
+                .owl-next {
+                    position: absolute;
+                    right: -70px;
+                }
+                .owl-prev {
+                    position: absolute;
+                    left: -70px;
+                }
+
+                .owl-prev:hover {
+                    background: initial !important;
+                    color: initial !important;
+                    text-decoration: none !important;
+                }
+
+        }
+
+        .owl-nav [class*=owl-] {
+            color: initial !important;
+            font-size: 40px !important;
+            margin: 0;
+            padding: 0;
+            background: none !important;
+            display: inline-block !important;
+            cursor: pointer !important;
+            border-radius: 0;
+        }
+    }
+
+    .hebergements-fav {
+
+        .card .card-footer .pull-right  {
+            color: #123866 !important;
+            text-transform: uppercase;
+            font-size: 15px;
+            background: whitesmoke;
+            border-radius: 50px;
+            padding: 10px 30px;
+            float: right;
+            margin-top: 2px;
+            }
+
+            .card .card-footer a {
+                color: #aeb4b6;
+                font-size: 15px;
+                position: relative;
+            }
+
+            .card-body p {
+                font-size: 15px;
+                color: initial;
+                float: left;
+                width: 100%;
+            }
+
+            .card-body .location {
+                color: #123866;
+            }
+
+    }
+
+
+  #reservationModal .modal-dialog {
+    max-width: 70vw;
+  }
+
+}
+
+.container {
+  max-width: 90% !important;
+  padding: 0;
+}
+
+.textBaseOrange{
+  color: #FF8500;
+}
+
+.bgBaseOrange{
+  background-color: #FF8500;
+}
+
+.textBaseBlue{
+  color: #123866;
+}
+
+.bgBaseBlue{
+  background-color: #123866;
+}
+
+
+.full-center{
+  vertical-align: middle;
+  text-align: center;
+}
+
+.btnOrange{
+  color: white;
+  border-radius: 5px;
+  background-color: #FF8500;
+}
+
+.btnBlue{
+  color: white;
+  border-radius: 5px;
+  background-color: #123866;
+}
+
+#DataTables_Table_0_length{
+  margin-bottom: 10px;
+}
+
+.admin-title-section{
+  border-left: 5px solid #FF8500;
+  padding-left: 5px;
+}
+
+.admin-divider{
+  width: 40px;
+  height:2px;
+  border-bottom: 4px solid black;
+}
+
+.admin-image-icon
+{
+  width: 20px;
+  height: 20px
+}

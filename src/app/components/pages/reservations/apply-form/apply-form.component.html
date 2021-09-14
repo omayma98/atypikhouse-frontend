@@ -1,0 +1,128 @@
+<section class="apply-from d-flex">
+  <div class="container">
+    <div class="row">
+      <div class="mx-auto">
+        <div class="form-wrapper my-5">
+          <div class="row">
+            <div class="col-md-12">
+              <h1 style="font-size: 2rem !important;" class="text-center mb-3 text-uppercase">Faire une réservation</h1>
+            </div>
+          </div>
+
+          <form _lpchecked="1" [formGroup]="applyForm" (ngSubmit)="onSubmitApply()">
+
+            <div *ngIf="serverErrors" class="alert alert-danger alert-dismissible fade show" role="alert">
+              <strong>{{serverErrors}}</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+
+
+            <div *ngIf="habitatIndisponible" class="alert alert-danger alert-dismissible fade show" role="alert">
+              <strong>Ce Habitat est indisponible entre {{ dateIndisponibleFrom | date:'d/M/yy' }} et {{dateIndisponibleFrom | date:'d/M/yy'}}</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-field">
+                  <label class="text-uppercase">Date d'entrée</label>
+                  <input type="date"
+                         formControlName="dateArrivee"
+                         class="form-control"
+                         id="dateArrivee"
+                         name="dateArrivee"
+                         [min]="minDate" [max]="maxDate">
+
+                  <div *ngIf="validationErrors?.dateArrivee" class="text-danger">
+                    {{validationErrors?.dateArrivee}}
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-field">
+                  <label class="text-uppercase">Date de sortie</label>
+                  <input type="date"
+                         formControlName="dateDepart"
+                         class="form-control"
+                         id="dateDepart"
+                         name="dateDepart"
+                         [min]="minDate" [max]="maxDate">
+
+                  <div *ngIf="validationErrors?.dateDepart" class="text-danger">
+                    {{validationErrors?.dateDepart}}
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-field">
+                  <label class="text-uppercase">Nombre de personnes</label>
+                  <input type="number" step=1 class="custom-select" id="nbrOccupant"
+                          formControlName="nbrOccupant"
+                          name="nbrOccupant"/>
+                  <div *ngIf="validationErrors?.nbrOccupant" class="text-danger">
+                    {{validationErrors?.nbrOccupant}}
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-3 col-md-12 d-inline">
+                <button class="btn btn-primary" *ngIf="!canMakePayment"
+                        [disabled]="!applyForm.valid">
+                  Réserver
+                </button>
+
+                <ngx-spinner
+                  bdColor="rgba(51,51,51,0.8)"
+                  size="medium"
+                  color="#fff"
+                  type="ball-scale-multiple"
+                >
+                  <p style="font-size: 20px; color: white">Traitement en cours...</p>
+                </ngx-spinner>
+              </div>
+
+              <div class="text-center px-5 col-md-12" *ngIf="canMakePayment">
+                <p class="text-center mb-3" style="font-size: 25px"> Nombre total de nuit : <span class="font-weight-bold text-warning" > {{nombreTotalDeNuit}} </span>  &nbsp;|&nbsp;
+                  Montant total à payer : <span class="font-weight-bold text-warning" > {{montantTotal}} &euro; </span> </p>
+                <div class=" w-50 m-auto">
+                    <ngx-paypal class="w-50"  [config]="payPalConfig"></ngx-paypal>
+                </div>
+              </div>
+
+              <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{successMessage}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+            </div>
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="submitted">
+      <div class="col-sm-12">
+        <h3>Your Data</h3>
+        <p>Nom : {{ user.nom }}</p>
+        <p>Prénom : {{ user.prenom }}</p>
+        <p>Mail : {{ user.email }} </p>
+        <p>Date 2 : {{ user.date2 }} </p>
+        <p>Nbre adultes : {{ user.nbAdultes }} </p>
+        <p>Nbre enfants : {{ user.nbEnfants }}</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- Button trigger modal -->

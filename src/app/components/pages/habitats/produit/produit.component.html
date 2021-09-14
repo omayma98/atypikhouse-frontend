@@ -1,0 +1,327 @@
+<section class="property-single-pg">
+
+  <ng-container *ngIf="Slides2">
+
+  <div class="d-flex justify-content-center">
+    <div style="width: 85vw;">
+
+      <owl-carousel-o [options]="carouselOptions" #owlMac (changed)="changeSlide($event)">
+        <ng-container *ngFor="let image of images; let i = index">
+          <ng-template carouselSlide>
+            <div class="bg-img b-0 content-second-carousel"
+                 [ngStyle]="{'background-image': 'url(' + 'https://admin.atypik-house.com/storage/' + image.lienImage + ')'}" style="height: 450px"
+            ><!--Illustration--></div>
+            <!-- <div class="machine" *ngFor="let machine of machines; let index = index"
+              [class.animated-cell]="index == animatedIndex"> </div> -->
+          </ng-template>
+        </ng-container>
+      </owl-carousel-o>
+
+      <owl-carousel-o [options]="categoriesOptions" #owlCat class="nav-none">
+        <ng-container *ngFor="let image of images; let i = index">
+          <ng-template carouselSlide>
+            <div (click)="slideTo(owlMac.dotsData.dots[i].id)" class="category bg-img"
+                 [ngStyle]="{'background-image': 'url(' + 'https://admin.atypik-house.com/storage/' + image.lienImage + ')'}"
+                 style="height: 150px; cursor: pointer">
+              <span class="b-0 category__title"><!--Illustration--></span>
+            </div>
+          </ng-template>
+        </ng-container>
+      </owl-carousel-o>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="property-single-page-content">
+      <div class="row">
+        <div class="col-lg-12 property-hd-sec">
+          <div class="card mb-5">
+            <div class="card-body mt-0">
+
+              <h1 style="font-size: 2.5rem !important; line-height: 1">{{Slides2.title}}</h1>
+              <p class="text-primary text-110 mt-2"><i class="la la-map-marker"></i>{{Slides2.adresse}}</p>
+              <p class="text-dark text-110 my-2">
+                {{Slides2.typeHabitat}}
+              </p>
+              <p class="text-dark text-110">{{Slides2.prixParNuit}} € / Nuit</p>
+            </div><!--card-body end-->
+            <div class="d-flex rate-info justify-content-center col-md-3 align-items-center flex-wrap">
+
+                <button [disabled]="!isSignedIn" type="button"
+                        class="w-100 float-right bg-primary text-white btn btn-outline-primary btn-block rounded"
+                        role="button" data-toggle="modal" data-target="#reservationModal">
+                  Réserver
+                </button>
+                <span *ngIf="!isSignedIn" class="d-block font-weight-bold text-center mt-2">
+                  Connectez-vous pour réserver.
+                </span>
+
+              <!-- Modal -->
+              <div *ngIf="isSignedIn" class="modal fade" id="reservationModal" tabindex="-1" role="dialog"
+                   aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Réservation</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+
+                    <app-apply-form [habitatid]="habitatid"></app-apply-form>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div><!--card end-->
+        </div><!---property-hd-sec end-->
+      </div>
+      <div class="row">
+        <div class="col-lg-12 pl-0 pr-0">
+          <div class="property-pg-left">
+
+            <div class="descp-text">
+              <h3>Description</h3>
+              <p>{{Slides2.description}}</p>
+            </div><!--descp-text end-->
+
+            <div class="features-dv">
+              <h3>Equipements</h3>
+              <form class="form_field">
+                <ul>
+                  <li class="input-field">
+                    <input type="checkbox" name="cc" id="c1" [attr.checked]="hasChauffage === 1 ? 'checked' : null" disabled>
+                    <label for="c1">
+                      <span></span>
+                      <small>Chauffage</small>
+                    </label>
+                  </li>
+                  <li class="input-field">
+                    <input type="checkbox" name="cc" id="c2" [attr.checked]="hasTelevision === 1 ? 'checked' : null" disabled>
+                    <label for="c2">
+                      <span></span>
+                      <small>Télévision</small>
+                    </label>
+                  </li>
+                  <li class="input-field">
+                    <input type="checkbox" name="cc" id="c3" [attr.checked]="hasClimatiseur === 1 ? 'checked' : null" disabled>
+                    <label for="c3">
+                      <span></span>
+                      <small>Climatiseur</small>
+                    </label>
+                  </li>
+                  <li class="input-field">
+                    <input type="checkbox" name="cc" id="c4" [attr.checked]="hasInternet === 1 ? 'checked' : null" disabled>
+                    <label for="c4">
+                      <span></span>
+                      <small>Internet</small>
+                    </label>
+                  </li>
+                </ul>
+              </form>
+            </div><!--features-dv end-->
+
+            <div class="map-dv d-none">
+              <h3>Location</h3>
+              <div id="map-container" class="fullwidth-home-map">
+                <div id="map" data-map-zoom="9"></div>
+              </div>
+            </div><!--map-dv end-->
+            <div class="nearby-locts">
+              <h3>What's Nearby?</h3>
+              <span>Powered by <img src="../../../../../assets/images/ylog.png" alt=""></span>
+              <div class="widget-posts">
+                <ul>
+                  <li>
+                    <div class="wd-posts">
+                      <div class="ps-img">
+                        <img src="https://via.placeholder.com/112x89" alt="">
+                      </div><!--ps-img end-->
+                      <div class="ps-info">
+                        <h3><a href="#" title="">The Museum of Modern Art</a></h3>
+                        <span><i class="la la-map-marker"></i>212 5th Ave, New York</span>
+                      </div><!--ps-info end-->
+                    </div><!--wd-posts end-->
+                    <ul class="star-rating">
+                      <li><span class="la la-star"></span></li>
+                      <li><span class="la la-star"></span></li>
+                      <li><span class="la la-star"></span></li>
+                      <li><span class="la la-star"></span></li>
+                      <li><span class="la la-star"></span></li>
+                    </ul><!--star-rating end-->
+                  </li>
+                  <li>
+                    <div class="wd-posts">
+                      <div class="ps-img">
+                        <img src="https://via.placeholder.com/112x89" alt="">
+                      </div><!--ps-img end-->
+                      <div class="ps-info">
+                        <h3><a href="#" title="">Joe's Shanghai</a></h3>
+                        <span><i class="la la-map-marker"></i>212 5th Ave, New York</span>
+                      </div><!--ps-info end-->
+                    </div><!--wd-posts end-->
+                    <ul class="star-rating">
+                      <li><span class="la la-star"></span></li>
+                      <li><span class="la la-star"></span></li>
+                      <li><span class="la la-star"></span></li>
+                      <li><span class="la la-star"></span></li>
+                      <li><span class="la la-star"></span></li>
+                    </ul><!--star-rating end-->
+                  </li>
+                  <li>
+                    <div class="wd-posts">
+                      <div class="ps-img">
+                        <img src="https://via.placeholder.com/112x89" alt="">
+                      </div><!--ps-img end-->
+                      <div class="ps-info">
+                        <h3><a href="#" title="">Apple Fifth Avenue</a></h3>
+                        <span><i class="la la-map-marker"></i>212 5th Ave, New York</span>
+                      </div><!--ps-info end-->
+                    </div><!--wd-posts end-->
+                    <ul class="star-rating">
+                      <li><span class="la la-star"></span></li>
+                      <li><span class="la la-star"></span></li>
+                      <li><span class="la la-star"></span></li>
+                      <li><span class="la la-star"></span></li>
+                      <li><span class="la la-star"></span></li>
+                    </ul><!--star-rating end-->
+                  </li>
+                </ul>
+              </div>
+            </div><!--nearby-locts end-->
+            <div class="comments-dv">
+              <h3>3 Reviews</h3>
+              <div class="comment-section">
+                <ul>
+                  <li>
+                    <div class="cm-info-sec">
+                      <div class="cm-img">
+                        <img src="https://via.placeholder.com/79x79" alt="">
+                      </div><!--author-img end-->
+                      <div class="cm-info">
+                        <h3>Kritsofer Nolan</h3>
+                        <h4>25 Avril, 2020</h4>
+                      </div>
+                      <ul class="rating-lst">
+                        <li><span class="la la-star"></span></li>
+                        <li><span class="la la-star"></span></li>
+                        <li><span class="la la-star"></span></li>
+                        <li><span class="la la-star"></span></li>
+                        <li><span class="la la-star"></span></li>
+                      </ul><!--rating-lst end-->
+                    </div><!--cm-info-sec end-->
+                    <p>Nam placerat facilisis placerat. Morbi elit nibh, auctor sit amet sodales id, porttitor eu quam.
+                      Aenean dui libero, laoreet quis con sequat vitae, posuere ut sapien. Etiam pharetra nulla vel diam
+                      eleifend, eu placerat nunc molestie. </p>
+                    <a href="#" title="" class="cm-reply">Répondre</a>
+                  </li>
+                  <li>
+                    <div class="cm-info-sec">
+                      <div class="cm-img">
+                        <img src="https://via.placeholder.com/79x79" alt="">
+                      </div><!--author-img end-->
+                      <div class="cm-info">
+                        <h3>Kritsofer Nolan</h3>
+                        <h4>25 Avril, 2020</h4>
+                      </div>
+                      <ul class="rating-lst">
+                        <li><span class="la la-star"></span></li>
+                        <li><span class="la la-star"></span></li>
+                        <li><span class="la la-star"></span></li>
+                        <li><span class="la la-star"></span></li>
+                        <li><span class="la la-star"></span></li>
+                      </ul><!--rating-lst end-->
+                    </div><!--cm-info-sec end-->
+                    <p>Nam placerat facilisis placerat. Morbi elit nibh, auctor sit amet sodales id, porttitor eu quam.
+                      Aenean dui libero, laoreet quis con sequat vitae, posuere ut sapien. Etiam pharetra nulla vel diam
+                      eleifend, eu placerat nunc molestie. </p>
+                    <a href="#" title="" class="cm-reply">Répondre</a>
+                  </li>
+                  <li>
+                    <div class="cm-info-sec">
+                      <div class="cm-img">
+                        <img src="https://via.placeholder.com/79x79" alt="">
+                      </div><!--author-img end-->
+                      <div class="cm-info">
+                        <h3>Kritsofer Nolan</h3>
+                        <h4>25 Avril, 2020</h4>
+                      </div>
+                      <ul class="rating-lst">
+                        <li><span class="la la-star"></span></li>
+                        <li><span class="la la-star"></span></li>
+                        <li><span class="la la-star"></span></li>
+                        <li><span class="la la-star"></span></li>
+                        <li><span class="la la-star"></span></li>
+                      </ul><!--rating-lst end-->
+                    </div><!--cm-info-sec end-->
+                    <p>Nam placerat facilisis placerat. Morbi elit nibh, auctor sit amet sodales id, porttitor eu quam.
+                      Aenean dui libero, laoreet quis con sequat vitae, posuere ut sapien. Etiam pharetra nulla vel diam
+                      eleifend, eu placerat nunc molestie. </p>
+                    <a href="#" title="" class="cm-reply">Répondre</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="review-hd">
+                <div class="rev-hd">
+                  <h3>Laisser un Review</h3>
+                  <ul class="rating-lst">
+                    <li><span class="la la-star"></span></li>
+                    <li><span class="la la-star"></span></li>
+                    <li><span class="la la-star"></span></li>
+                    <li><span class="la la-star"></span></li>
+                    <li><span class="la la-star"></span></li>
+                  </ul><!--rating-lst end-->
+                </div><!--rev-hd end-->
+                <div class="post-comment-sec">
+                  <form>
+                    <div class="row">
+                      <div class="col-lg-4 col-md-4 pl-0">
+                        <div class="form-field">
+                          <input type="text" name="name" placeholder="Votre Nom">
+                        </div><!--form-field end-->
+                      </div>
+                      <div class="col-lg-4 col-md-4">
+                        <div class="form-field">
+                          <input type="text" name="email" placeholder="Email">
+                        </div><!--form-field end-->
+                      </div>
+                      <div class="col-lg-4 col-md-4 pr-0">
+                        <div class="form-field">
+                          <input type="text" name="phone" placeholder="Votre Téléphone">
+                        </div><!--form-field end-->
+                      </div>
+                      <div class="col-lg-12 pl-0 pr-0">
+                        <div class="form-field">
+                          <textarea name="message" placeholder="Votre Message"></textarea>
+                        </div><!--form-field end-->
+                      </div>
+                      <div class="col-lg-12 pl-0 pr-0">
+                        <button type="submit" class="btn rounded bg-primary text-white">Publier le review</button>
+                      </div>
+                    </div>
+                  </form>
+                </div><!--post-comment-sec end-->
+              </div><!--review-hd end-->
+            </div><!--comments-dv end-->
+
+          </div><!--property-pg-left end-->
+        </div>
+        <div class="col-lg-12 d-none pr-0">
+
+        </div>
+
+
+      </div>
+    </div><!--property-single-page-content end-->
+
+  </div>
+
+  </ng-container>
+
+</section><!--property-single-pg end-->
+<app-hebergements-populaires></app-hebergements-populaires>

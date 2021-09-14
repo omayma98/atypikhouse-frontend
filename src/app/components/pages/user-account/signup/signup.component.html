@@ -1,0 +1,68 @@
+<section class="pager-sec bfr mb-5">
+  <div class="container">
+    <div class="pager-sec-details d-flex justify-content-center justify-content-sm-between  flex-wrap align-items-center">
+      <h1 class="text-white">S'incrire</h1>
+      <ul>
+        <li><a routerLink="/accueil" title="">Accueil</a></li>
+        <li><span>S'inscrire</span></li>
+      </ul>
+    </div><!--pager-sec-details end-->
+  </div>
+</section>
+<div class="container d-flex justify-content-center align-items-center my-5">
+  <div class="col-md-6">
+    <div class="auth-wrapper">
+      <form class="form-signin" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+        <span *ngIf="successNotification" class="d-block alert alert-success mt-3">
+          {{ successNotification }}
+        </span>
+
+        <!-- Signup form -->
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" class="form-control" formControlName="name">
+          <span *ngIf="serverValidationsErrors.name" class=" text-danger mt-3">
+            {{ serverValidationsErrors.name }}
+          </span>
+        </div>
+        <div class="form-group">
+          <label>Email address</label>
+          <input type="email" class="form-control" formControlName="email">
+          <span *ngIf="serverValidationsErrors.email" class=" text-danger mt-3">
+            {{ serverValidationsErrors.email }}
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label>Téléphone</label>
+          <input type="text" class="form-control" name="telephone" formControlName="telephone">
+          <span *ngIf="serverValidationsErrors.telephone" class=" text-danger mt-3">
+            {{ serverValidationsErrors.telephone }}
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label>Adresse</label>
+          <input type="text" class="form-control" formControlName="adresse">
+          <span *ngIf="serverValidationsErrors.adresse" class=" text-danger mt-3">
+            {{ serverValidationsErrors.adresse }}
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" formControlName="password">
+          <span *ngIf="serverValidationsErrors.password" class=" text-danger mt-3">
+            {{ serverValidationsErrors.password }}
+          </span>
+        </div>
+        <div class="form-group">
+          <label>Confirm Password</label>
+          <input type="password" class="form-control" formControlName="password_confirmation">
+        </div>
+        <button type="submit" class="btn btn-block btn-primary">S'incrire</button>
+      </form>
+    </div>
+  </div>
+</div>

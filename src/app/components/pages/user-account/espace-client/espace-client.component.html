@@ -1,0 +1,166 @@
+<div class="espace-client">
+  <section class="pager-sec bfr mb-5">
+    <div class="container">
+      <div
+        class="pager-sec-details d-flex justify-content-center justify-content-sm-between  flex-wrap align-items-center">
+        <h1 class="text-white">Bonjour, {{userAuthentificated.name | uppercase}}.</h1>
+        <ul>
+          <li><a routerLink="/accueil" title="">Accueil</a></li>
+          <li><span>Espace Client</span></li>
+        </ul>
+      </div><!--pager-sec-details end-->
+    </div>
+  </section>
+
+  <!-- start profile information and form to ask to add habitat-->
+  <section class="page-main-content mb-5 ">
+    <div class="container">
+      <div class="agent-profile-sec">
+        <div class="row">
+          <!-- start left part-->
+          <div class="col-xl-6 col-lg-4 col-md-12">
+           <div class="row">
+              <!--start profile informations-->
+              <div class="col-12 bg-white">
+                <div class="agent-profile ">
+                  <div class="p-3">
+                    <div class="mb-3">
+                      <p class="text-right"><i (click)="wantToUpdateProfile()" class="fas edit-pencil fa-pencil-alt"
+                                               title="modifier vos informations"></i></p>
+                      <span class="h2">Vos Informations personnelles </span>
+                    </div>
+                    <p class="text-dark">
+                      <span class="font-weight-bold mr-3">Nom:</span> {{userAuthentificated?.name | uppercase}}
+                    </p>
+                    <p class="text-dark"><span class="font-weight-bold mr-3">Email:</span>  {{userAuthentificated?.email}}
+                    </p>
+                    <p class="text-dark"><span class="font-weight-bold mr-3">Adresse:</span> {{userAuthentificated.adresse}}
+                    </p>
+                    <p class="text-dark"><span
+                      class="font-weight-bold mr-3"> Téléphone: </span> {{userAuthentificated.telephone}} </p>
+                    <p class="text-dark">
+                      <span class="font-weight-bold mr-3">Autorisation pour ajouter un habitat:</span>
+                      <i *ngIf="userAuthentificated.canAddHabitat" class="fas fa-check-square  text-success" title="vous n'êtes pas autorisé à ajouter un habitat"></i>
+                      <i *ngIf="!userAuthentificated.canAddHabitat" class="fas fa-times-circle text-danger" title="vous êtes autorisé à ajouter un habitat"></i>
+                    </p>
+                    <p *ngIf="userAuthentificated.canAddHabitat">
+                      <a routerLink="ajouter-habitat"> <i class="fas fa-plus-circle"></i> Nouvel habitat</a>
+                    </p>
+                    <p *ngIf="!userAuthentificated.wantToAddHabitat">
+                  <span class="wantToHaddHabitat"
+                        (click)="wantToAddHabitat()">Je souhaite pouvoir ajouter des habitats</span>
+                    </p>
+
+                  </div><!--agent-info end-->
+                </div><!--agent-profile end-->
+              </div>
+             <!--end profile information-->
+             <!--start voir mes réservations-->
+              <div class="col-12 mt-2 bg-white p-2">
+                <a routerLink="./mes-reservations" class="linkReservations"> <i class="fas fa-chevron-right fa-2x"></i> <span class="h2"> Voir mon historique de réservations</span></a>
+              </div>
+             <!--end voir mes réservations-->
+
+             <!--start voir mes habitat-->
+             <div class="col-12 mt-2 bg-white p-2">
+               <a routerLink="./mes-habitats" class="linkHabitat"> <i class="fas fa-chevron-right fa-2x"></i>  <span class="h2"> Voir mes habitats</span></a>
+             </div>
+             <!--end voir mes réservations-->
+
+           </div>
+          </div>
+          <!--end left part-->
+
+          <div class="col-xl-4 offset-lg-1 col-lg-5 col-md-12 ">
+            <div class="row">
+              <div *ngIf="successNotification" class="alert col-12 alert-success alert-dismissible fade show" role="alert">
+                {{successNotification}}
+                <button (click)="updateSuccessNotifcation()"  type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <!-- stat profil update form -->
+              <div *ngIf="userWantToUpdateProfile" class=" p-3 bg-white">
+                <div class="contact-agent">
+                  <p class="h4 mb-4">Modification de vos informations</p>
+
+                  <form (ngSubmit)="onSubmitProfilForm()" [formGroup]="profilForm">
+                    <div class="form-group">
+                      <label for="name">Nom</label>
+                      <input class="form-control mt-2" formControlName="name" id="name" type="text">
+                      <span *ngIf="serverValidationErrors?.name" class="d-block alert alert-danger mt-3">
+                          {{ serverValidationErrors?.name }}
+                        </span>
+                    </div><!--form-field end-->
+
+                    <div class="form-group">
+                      <label for="siren">Email</label>
+                      <input class="form-control mt-2" formControlName="email" id="email" type="text">
+                      <span *ngIf="serverValidationErrors?.email" class="text-danger">
+                          {{ serverValidationErrors?.email }}
+                        </span>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="adresse">Adresse</label>
+                      <input class="form-control mt-2" formControlName="adresse" id="adresse" type="text">
+                      <div *ngIf="serverValidationErrors?.adresse">
+                        <span class="text-danger"> {{serverValidationErrors?.adresse }}</span>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="telephone">Téléphone</label>
+                      <input class="form-control mt-2" formControlName="telephone" id="telephone" type="text">
+                      <div *ngIf="serverValidationErrors?.telephone">
+                        <span class="text-danger"> {{ serverValidationErrors?.telephone }} </span>
+                      </div>
+                    </div>
+
+                    <button class="btn btn2 p-0" type="submit" [disabled]="!profilForm.valid" >Modifier</button>
+                  </form>
+                </div>
+              </div>
+              <!-- end profi update form -->
+
+              <!-- start demande ajout habitat part -->
+              <div *ngIf="userWantToAddHabitat" class="col-12 bg-white mt-3 p-3">
+                <div class="contact-agent">
+                  <p class="h4 mb-4">Demande d'autorisation pour ajouter un habitat</p>
+
+                  <form (ngSubmit)="onSubmitApply()" [formGroup]="askAddForm">
+                    <div class="form-group">
+                      <label for="nomEntreprise">Nom de votre entreprise</label>
+                      <input class="form-control mt-2" formControlName="nomEntreprise" id="nomEntreprise"
+                             name="nomEntreprise" type="text">
+                      <span *ngIf="serverValidationErrors?.nomEntreprise" class="d-block alert alert-danger mt-3">
+                        {{ serverValidationErrors?.nomEntreprise }}
+                      </span>
+                    </div><!--form-field end-->
+
+                    <div class="form-group">
+                      <label for="siren">Votre siren</label>
+                      <input class="form-control mt-2" formControlName="siren" id="siren" name="siren" type="text">
+                      <span [style.display]="!success ? 'block' : 'none'">
+                          <span *ngIf="serverValidationErrors?.siren" class="d-block alert alert-danger mt-3">
+                            {{ serverValidationErrors?.siren }}
+                          </span>
+                        </span>
+                    </div><!--form-field end-->
+
+                    <button class="btn btn2 p-0" type="submit" [disabled]="!askAddForm.valid" >Envoyer</button>
+                  </form>
+                </div>
+              </div>
+              <!-- end demande ajout habitat part -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end profile information-->
+  <router-outlet></router-outlet>
+
+</div>

@@ -1,0 +1,216 @@
+<header>
+<div class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <a class="navbar-brand" routerLink="/accueil">
+                            <img src="../../../../../assets/images/logo-ah-2-5-1.png" alt="">
+                        </a>
+                        <button class="menu-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent">
+                            <span class="icon-spar"></span>
+                            <span class="icon-spar"></span>
+                            <span class="icon-spar"></span>
+                        </button>
+
+                        <div class="navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link" routerLink="/accueil" routerLinkActive="actif" data-toggle="dropdown">
+                                        Accueil
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link" href="#" data-toggle="dropdown">
+                                        Destinations
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link" routerLink="/habitats" routerLinkActive="actif" data-toggle="dropdown">
+                                        Les Habitats
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                <a class="nav-link" routerLink="/contact" routerLinkActive="actif" data-toggle="dropdown">
+                                  Contact
+                                </a>
+                              </li>
+                            </ul>
+                            <div class="d-flex align-items-center my-2 my-lg-0">
+                              <ul class="navbar-nav mr-md-3">
+                              <li *ngIf="isLoggedIn" class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown">
+                                  Profile
+                                </a>
+                                <div class="dropdown-menu animated">
+
+                                  <a class="dropdown-item" routerLink="/espace-client">Espace Client</a>
+                                  <a class="dropdown-item" routerLink="/espace-client/mes-reservations">Mes réservations</a>
+                                  <a class="dropdown-item" routerLink="/espace-client/mes-habitats">Mes Habitats</a>
+                                  <a (click)="logout()" class="dropdown-item" style="cursor: pointer">Se deconnecter</a>
+                                </div>
+                              </li>
+                            </ul>
+                              <ul class="navbar-nav">
+                                    <li *ngIf="!isLoggedIn" class="nav-item signin-btn">
+                                        <p href="" class="nav-link">
+                                            <i class="la la-sign-in mr-2"></i>
+                                          <!--<span><b class="signin-op">Se connecter</b> ou <b class="reg-op">S'inscrire</b></span>-->
+                                          <span><a routerLink="/login">Se connecter</a> ou <a routerLink="/signup">S'inscrire</a></span>
+                                        </p>
+
+                                    </li>
+
+                                    <li *ngIf="isLoggedIn" class="nav-item submit-btn">
+                                        <a routerLink="/ajouter-habitat" class="my-2 my-sm-0 nav-link sbmt-btn">
+                                            <i class="icon-plus"></i>
+                                            <span>Ajouter un habitat</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <a href="#" title="" class="close-menu"><i class="la la-close"></i></a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div></div>
+
+</header><!--header end-->
+
+
+
+
+
+
+<!-- <div class="popup" id="sign-popup">
+    <h3>Se connecter à votre compte</h3>
+    <div class="popup-form">
+        <form [formGroup]="signinForm" (ngSubmit)="onSubmitSignin()">
+
+            <div class="form-field">
+                <input type="email"
+                       class="form-control"
+                       name="email"
+                       placeholder="Email"
+                       formControlName="email">
+            </div>
+
+            <div class="form-field">
+                <input type="password"
+                       class="form-control"
+                       placeholder="Mot de passe">
+            </div>
+            <div class="form-cp">
+                <div class="form-field">
+                    <div class="input-field">
+                        <input type="checkbox" name="ccc" id="cc1">
+                        <label for="cc1">
+                            <span></span>
+                            <small>Enregistrer</small>
+                        </label>
+                    </div>
+                </div>
+                <a href="#" title="">Mot de passe oublié ?</a>
+            </div>
+            <button type="submit" class="btn2">Se connecter</button>
+        </form>
+        <a href="#" title="" class="fb-btn"> <i class="fa fa-facebook"></i>Se connecter avec facebook</a>
+    </div>
+</div>popup end-->
+
+<!-- <div class="popup" id="register-popup">
+    <h3>Register</h3>
+    <div class="popup-form">
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmitSignup()">
+
+            <div class="form-field">
+                <input type="text"
+                       class="form-control"
+                       name="name"
+                       placeholder="Nom"
+                       formControlName="name">
+            </div>
+          <div class="form-field">
+            <input type="email"
+                   class="form-control"
+                   name="email"
+                   placeholder="Email"
+                   formControlName="email"
+                   >
+            <span *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched"
+                  class="help-block text-left">
+            Veuillez rentrer un email valide.
+            </span>
+          </div>
+          <div class="form-field">
+            <input type="text"
+                   class="form-control"
+                   name="adresse"
+                   placeholder="Adresse"
+                   formControlName="adresse">
+          </div>
+          <div class="form-field">
+          <input type="number"
+                 class="form-control"
+                 name="telephone"
+                 placeholder="Téléphone"
+                 formControlName="telephone">
+        </div>
+          <div class="form-field">
+            <input type="password"
+                   id="password"
+                   class="form-control"
+                   name="password"
+                   placeholder="Mot de passe"
+                   formControlName="password">
+          </div>
+
+          <div class="form-field">
+            <input type="password"
+                   id="confirm_password"
+                   ngValidateEqual="password"
+                   class="form-control"
+                   name="password_confirmation"
+                   placeholder="Mot de passe"
+                   formControlName="password_confirmation">
+
+
+
+          </div>
+            <div class="form-cp">
+                <div class="form-field">
+                    <div class="input-field">
+                        <input type="checkbox"
+                               class="form-control"
+                               name="ccc" id="cc2"
+                              >
+                        <label for="cc2">
+                            <span></span>
+                            <small>J'adhère aux conditions</small>
+                        </label>
+                    </div>
+                </div>
+                <a href="#" title="" class="signin-op">Déjà un compte?</a>
+            </div>
+            <button type="submit" class="btn2">S'inscrire</button>
+        </form>
+    </div>
+</div>-->
+<!--
+<script>
+  var password = document.getElementById("password");
+  var confirm_password = document.getElementById("confirm_password");
+
+  function validatePassword(){
+    if(password.value != confirm_password.value) {
+      confirm_password.setCustomValidity("Passwords Don't Match");
+      alert('Veuillez bien confirmer votre mot de passe')
+    } else {
+      confirm_password.setCustomValidity('');
+    }
+  }
+
+  password.onchange = validatePassword;
+  confirm_password.onkeyup = validatePassword;
+</script>-->

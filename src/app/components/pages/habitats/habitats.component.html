@@ -1,0 +1,237 @@
+<section class="pager-sec bfr">
+    <div class="container">
+      <div class="pager-sec-details d-flex justify-content-center justify-content-sm-between flex-wrap align-items-center">
+        <h1 class="text-white">Les habitats</h1>
+        <ul>
+          <li><a href="/accueil" title="">Accueil</a></li>
+          <li><span>Les habitats</span></li>
+        </ul>
+      </div><!--pager-sec-details end-->
+    </div>
+  </section>
+
+<section class="listing-main-sec section-padding2">
+    <div class="container">
+      <div class="listing-main-sec-details">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="listing-directs">
+              <div class="list-head">
+                <div class="sortby">
+                  <span>Trier par :</span>
+                  <div class="drop-menu">
+                    <div class="select">
+                      <span>Relevant</span>
+                      <i class="la la-caret-down"></i>
+                    </div>
+                    <input type="hidden" name="gender">
+                    <ul class="dropeddown">
+                      <li>For Sale</li>
+                      <li>For Rent</li>
+                    </ul>
+                  </div>
+                </div><!--sortby end-->
+
+
+
+              </div><!--list-head end-->
+
+
+
+
+
+
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="grid-view-tab2" role="tabpanel" aria-labelledby="grid-view-tab2">
+                  <div class="list_products">
+                    <div class="row">
+
+                      <ng-container *ngFor="let habitat of allHabitats">
+
+                         <div class="col-lg-6 col-md-6">
+                            <div class="card">
+                              <a routerLink="/habitat/{{habitat.id}}" title="">
+                                <div class="img-block">
+                                  <div class="overlay"></div>
+                                  <img src="https://admin.atypik-house.com/storage/{{habitat.vues[1].lienImage}}" alt="" class="img-fluid">
+                                </div>
+                              </a>
+                              <div class="card-body">
+                                <h3>{{habitat.title}}</h3>
+                                <p class="location mb-3"> <i class="la la-map-marker"></i>{{habitat.adresse}}</p>
+                                <p class="pb-3" style="border-bottom: 5px solid whitesmoke;">
+                                  <span href="#" class="pull-left">{{habitat.typeHabitat}}</span>
+                                  <span href="#" class="pull-right">{{habitat.prixParNuit}} / Nuit</span>
+                                </p>
+                              </div>
+                              <div class="card-footer card-footer d-flex align-items-center justify-content-between">
+                                <a href="#" class="pull-left">
+                                  <i class="la la-heart-o mr-2"></i>Enregistrer
+                                </a>
+                                <a routerLink="/habitat/{{habitat.id}}" class="pull-right">
+                                  <span>Détails</span>
+                                </a>
+                              </div>
+                              <a routerLink="/habitat/{{habitat.id}}" title="" class="ext-link"></a>
+                            </div>
+                          </div>
+
+                      </ng-container>
+
+
+                    </div>
+                  </div><!--list_products end-->
+
+                </div>
+
+              </div><!--tab-content end-->
+
+
+
+
+
+
+
+
+
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true"><i class="la la-arrow-right"></i></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav><!--pagination end-->
+
+            </div><!--listing-directs end-->
+          </div>
+          <div class="col-lg-4">
+            <div class="sidebar layout2">
+              <div class="widget widget-property-search">
+                <h3 class="widget-title">Recherche d'hébergements</h3>
+                <form action="#" class="row banner-search">
+                  <div class="form_field">
+                    <input type="text" class="form-control" placeholder="Destination">
+                  </div>
+                  <div class="form_field">
+                    <div class="form-group">
+                      <div class="drop-menu">
+                        <div class="select">
+                          <span>Type d'Habitats</span>
+                          <i class="fa fa-angle-down"></i>
+                        </div>
+                        <input type="hidden" name="gender">
+                        <ul class="dropeddown">
+                          <li>Dôme</li>
+                          <li>Tente</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form_field">
+                    <div class="form-group">
+                      <div class="drop-menu">
+                        <div class="select">
+                          <span>Nombres de personnes</span>
+                          <i class="fa fa-angle-down"></i>
+                        </div>
+                        <input type="hidden" name="gender">
+                        <ul class="dropeddown">
+                          <li>300</li>
+                          <li>400</li>
+                          <li>500</li>
+                          <li>200</li>
+                          <li>600</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form_field">
+                    <h4>Plus de fonctionnalités</h4>
+                    <ul>
+                      <li class="input-field">
+                        <input type="checkbox" name="cc" id="c1">
+                        <label for="c1">
+                          <span></span>
+                          <small>Parking</small>
+                        </label>
+                      </li>
+                      <li class="input-field">
+                        <input type="checkbox" name="cc" id="c2">
+                        <label for="c2">
+                          <span></span>
+                          <small>Air Conditioner</small>
+                        </label>
+                      </li>
+                      <li class="input-field">
+                        <input type="checkbox" name="cc" id="c3">
+                        <label for="c3">
+                          <span></span>
+                          <small>Washing Machines</small>
+                        </label>
+                      </li>
+                      <li class="input-field">
+                        <input type="checkbox" name="cc" id="c4">
+                        <label for="c4">
+                          <span></span>
+                          <small>Heating</small>
+                        </label>
+                      </li>
+                    </ul>
+                    <ul>
+                      <li class="input-field">
+                        <input type="checkbox" name="cc" id="c5">
+                        <label for="c5">
+                          <span></span>
+                          <small>Gym</small>
+                        </label>
+                      </li>
+                      <li class="input-field">
+                        <input type="checkbox" name="cc" id="c6">
+                        <label for="c6">
+                          <span></span>
+                          <small>Wireless Internet</small>
+                        </label>
+                      </li>
+                      <li class="input-field">
+                        <input type="checkbox" name="cc" id="c7">
+                        <label for="c7">
+                          <span></span>
+                          <small>Elevator</small>
+                        </label>
+                      </li>
+                      <li class="input-field">
+                        <input type="checkbox" name="cc" id="c8">
+                        <label for="c8">
+                          <span></span>
+                          <small>Swimming Pool</small>
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="form_field">
+                    <a href="#" class="btn btn-outline-primary ">
+                      <span>Rechercher</span>
+                    </a>
+                  </div>
+
+                </form>
+              </div><!--widget-property-search end-->
+
+            </div><!--sidebar end-->
+          </div>
+        </div>
+      </div><!--listing-main-sec-details end-->
+    </div>
+  </section><!--listing-main-sec end-->
+
+
+
+
+

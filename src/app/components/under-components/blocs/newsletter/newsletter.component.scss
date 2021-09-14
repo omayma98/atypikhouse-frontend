@@ -1,0 +1,34 @@
+.newsletter {
+    min-height: 400px;
+
+    .btn {
+        border-radius: 15px;
+        background: rgb(255,131,0);
+        background: linear-gradient(145deg, rgba(255,131,0,1) 0%, rgba(0,39,176,1) 100%); 
+        height: 80%;
+        width: 50px;
+
+        i {
+            font-size: 20px;
+        }
+    }
+
+    h2 {
+        line-height: 55px;
+    }
+
+    .input-group {
+        height: 50px;
+    }
+} 
+
+.newsletter::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: -1;
+}

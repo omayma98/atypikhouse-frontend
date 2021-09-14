@@ -1,0 +1,63 @@
+<section class="pager-sec bfr mb-5">
+  <div class="container">
+    <div class="pager-sec-details d-flex justify-content-center justify-content-sm-between  flex-wrap align-items-center">
+      <h1 class="text-white">Votre habitat : {{ habitatDetails?.title }}</h1> <br>
+      <ul>
+        <li><a routerLink="/accueil" title="">Accueil</a></li>
+        <li><span>Se connecter</span></li>
+      </ul>
+    </div><!--pager-sec-details end-->
+  </div>
+</section>
+
+<section class="page-main-content mb-5">
+  <div class="container">
+    <div *ngIf="habitatDetails">
+      <!--debut titre et description -->
+      <div  class="bg-white p-3  pt-1 @endif mt-3" style="position: relative">
+        <div class="text-right" >
+          <a [routerLink]="['/espace-client/mes-habitats/modifier-habitat', habitatDetails.id]">
+            <button class="btn  btnBlue"> <i class="fa fa-edit"></i> Modifier ce habitat</button>
+          </a>
+        </div>
+        <div >
+          <h3 class="admin-title-section mb-4 h3" style="display: inline-block"> Informations </h3>
+        </div>
+        <h4> {{ habitatDetails.title }}</h4>
+        <div class="admin-divider"></div>
+        <div class="mt-3"> {{ habitatDetails.description }}</div>
+
+        <h4 class="mt-3 "> Prix par nuit : <span class="textBaseOrange">{{ habitatDetails.prixParNuit }} € </span> </h4>
+
+        <p class="text-bold mt-4"> <i class="fas fa-map-marker-alt"></i> {{ habitatDetails.adresse }}</p>
+      </div>
+      <!--fin partie informations -->
+
+      <!--debut équipements -->
+      <div  class="bg-white p-3 mt-3">
+        <h3 class="admin-title-section mb-4 h3" style="display: inline-block"> Équipements </h3>
+        <div>
+          <span class="mx-4"> <i class="fas fa-tv"></i> Télévision : {{ habitatDetails.hasTelevision  ? "Oui"  : "Non"}}</span>
+          <span class="mx-4" > <img class="admin-image-icon" src="/assets/images/air-conditioner.png" alt="climatiseur" style=""> Climatiseur : {{ habitatDetails.hasClimatiseur ? "Oui"  : "Non"}}</span>
+          <span class="mx-4 "> <img class="admin-image-icon" src="/assets/images/heater.png" alt="chauffage" style="margin-top: -5px"> Chauffage : {{ habitatDetails.hasChauffage  ? "Oui"  : "Non"}}</span>
+          <span class="mx-4 "> <i class="fas fa-wifi"></i> Internet : {{ habitatDetails.hasInternet  ? "Oui"  : "Non"}}</span>
+          <span class="mx-4"> <img class="admin-image-icon" src="/assets/images/room.png" alt="chambre" style="margin-top: -5px"> Nombre de chambres : {{ habitatDetails.nombreChambre }}</span>
+          <span class="mx-4"> <img class="admin-image-icon" src="/assets/images/bed.png" alt="lit" style="margin-top: -5px">  Nombre de lit : {{ habitatDetails.nombreLit }}</span>
+        </div>
+      </div>
+      <!--fin équipements -->
+      <div  class="bg-white p-3 mt-3">
+        <h3 class="admin-title-section mb-4 h3" style="display: inline-block"> Images </h3>
+        <div class="row ">
+          <div class="ml-5 col-md-3  mb-3 " *ngFor="let image of  habitatDetails?.vues ">
+            <img class="img-fluid" src="{{imageBaseUrl + image?.lienImage}}" width="800" height="300" alt=""/>
+            <div class="bg-admin-base text-center p-2" *ngIf="image.legende">
+              {{image?.legende}}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

@@ -1,0 +1,275 @@
+<section class="pager-sec bfr">
+  <div class="container">
+    <div
+      class="pager-sec-details d-flex justify-content-center justify-content-sm-between  flex-wrap align-items-center">
+      <h1 class="text-white">Modifier votre habitat : {{habitatToModify.title | titlecase}}</h1>
+      <ul>
+        <li><a routerLink="/accueil" title="">Accueil</a></li>
+        <li><span>Publier un Habitat</span></li>
+      </ul>
+    </div><!--pager-sec-details end-->
+  </div>
+</section>
+<section class="apply-from d-flex mt-3 mb-5">
+  <div class="container p-3 pt-5">
+      <!-- start success notification-->
+      <div class="d-flex justify-content-center bg-white p-3" *ngIf="successNotification"
+           (click)="resetNotification('successNotification')">
+        <div class="alert alert-success alert-dismissible fade show w-50 text-dark"  role="alert">
+          {{successNotification}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+      <!-- end success notification-->
+
+      <!-- start error notification-->
+      <div class="d-flex justify-content-center bg-white p-3" *ngIf="errorNotification">
+        <div class="alert alert-danger alert-dismissible text-dark fade show w-50" role="alert"
+             (click)="resetNotification('errorNotification')">
+          {{errorNotification}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+      <!-- end error notification-->
+
+      <form (ngSubmit)="onSubmitApply()" [formGroup]="habitatForm" enctype='multipart/form-data'
+            *ngIf="habitatToModify">
+          <!-- Start text part-->
+          <div class="bg-white py-3">
+            <div class="row">
+            <!-- start left part form -->
+            <div class="col-md-6">
+              <div class="col-12">
+                <div class="form-field">
+                  <label>Titre</label>
+                  <input
+                    class="form-control"
+                    formControlName="title"
+                    id="title"
+                    name="title"
+                    type="text">
+                  <span *ngIf="serverValidationErrors?.title" class="d-block alert alert-danger mt-3">
+                    {{ serverValidationErrors?.title }}
+                  </span>
+                </div>
+
+              </div>
+              <div class="col-12">
+                <div class="form-field">
+                  <label>Description</label>
+                  <textarea
+                    rows="30"
+                    class="form-control"
+                    formControlName="description"
+                    id="description"
+                    name="description">
+
+                    </textarea>
+                  <span *ngIf="serverValidationErrors?.description" class="d-block alert alert-danger mt-3">
+                    {{ serverValidationErrors?.description }}
+                  </span>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-field">
+                  <label>Adresse</label>
+                  <input class="form-control"
+                         formControlName="adresse"
+                         id="adresse"
+                         name="adresse"
+                         type="text">
+                  <span *ngIf="serverValidationErrors?.adresse" class="d-block alert alert-danger mt-3">
+                    {{ serverValidationErrors?.adresse }}
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-12 form-field">
+                <label>Prix par nuit ( € ) </label>
+                <input class="form-control"
+                       formControlName="prixParNuit"
+                       id="prixParNuit"
+                       name="prixParNuit"
+                       step="0.01"
+                       type="number">
+                <span *ngIf="serverValidationErrors?.prixParNuit" class="d-block alert alert-danger mt-3">
+                    {{ serverValidationErrors?.prixParNuit }}
+                  </span>
+              </div>
+              <div class="col-12">
+                <div class="form-field">
+                  <label>Nombre de Lits</label>
+                  <input class="form-control"
+                         formControlName="nombreLit"
+                         id="nombreLit"
+                         name="nombreLit"
+                         type="number">
+                  <span *ngIf="serverValidationErrors?.nombreLit" class="d-block alert alert-danger mt-3">
+                    {{ serverValidationErrors?.nombreLit }}
+                    </span>
+                </div>
+              </div>
+            </div>
+            <!-- end left part form -->
+
+            <!-- start right part form -->
+            <div class="col-md-6">
+              <div class="col-md-12">
+                <div class="form-field">
+                  <label>Nombre de chambres</label>
+                  <input class="form-control"
+                         formControlName="nombreChambre"
+                         id="nombreChambre"
+                         name="nombreChambre"
+                         type="number">
+                  <span *ngIf="serverValidationErrors?.nombreChambre" class="d-block alert alert-danger mt-3">
+                      {{ serverValidationErrors?.nombreChambre }}
+                    </span>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-field">
+                  <label>Disposez vous d'une Television ?</label>
+                  <select class="custom-select"
+                          formControlName="hasTelevision"
+                          name="hasTelevision">
+                    <option disabled>Veuillez choisir</option>
+                    <option value="0" [selected]="habitatToModify.hasTelevision===0">Non</option>
+                    <option value="1" [selected]="habitatToModify.hasTelevision===1">Oui</option>
+                  </select>
+                  <span *ngIf="serverValidationErrors?.hasTelevision" class="d-block alert alert-danger mt-3">
+                    {{ serverValidationErrors?.hasTelevision }}
+                  </span>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-field">
+                  <label>Vous avez un Chauffage ?</label>
+                  <select class="custom-select"
+                          formControlName="hasChauffage"
+                          name="hasChauffage">
+                    <option disabled>Veuillez choisir</option>
+                    <option selected value="0" [selected]="habitatToModify.hasChauffage===0">Non</option>
+                    <option value="1" [selected]="habitatToModify.hasChauffage===1">Oui</option>
+                  </select>
+                  <span *ngIf="serverValidationErrors?.hasChauffage" class="d-block alert alert-danger mt-3">
+                    {{ serverValidationErrors?.hasChauffage }}
+                  </span>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-field">
+                  <label>Vous avez un Climatiseur ?</label>
+                  <select class="custom-select"
+                          formControlName="hasClimatiseur"
+                          name="hasClimatiseur">
+                    <option disabled>Veuillez choisir</option>
+                    <option value="0" [selected]="habitatToModify.hasClimatiseur===0">Non</option>
+                    <option value="1" [selected]="habitatToModify.hasClimatiseur===1">Oui</option>
+                  </select>
+                  <span *ngIf="serverValidationErrors?.hasClimatiseur" class="d-block alert alert-danger mt-3">
+                    {{ serverValidationErrors?.hasClimatiseur }}
+                  </span>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-field">
+                  <label>Vous avez un accès Internet ?</label>
+                  <select class="custom-select"
+                          formControlName="hasInternet"
+                          name="hasInternet">
+                    <option disabled>Veuillez choisir</option>
+                    <option selected value="0" [selected]="habitatToModify.hasInternet===0">Non</option>
+                    <option value="1" [selected]="habitatToModify.hasInternet===1">Oui</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-field">
+                  <label>Type d'Habitats</label>
+                  <select class="custom-select"
+                          formControlName="typeHabitat"
+                          name="typeHabitat">
+                    <option [ngValue]="" disabled>Veuillez choisir</option>
+                    <option *ngFor="let type of type2"
+                            [attr.value]="type.id"
+                            [attr.selected]="type.id===habitatToModify.typeHabitat ? true : null">
+                      {{type.libelle}}
+                    </option>
+                  </select>
+                  <span *ngIf="serverValidationErrors?.typeHabitat" class="d-block alert alert-danger mt-3">
+                    {{ serverValidationErrors?.typeHabitat }}
+                    </span>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-field">
+                  <label>Images de votre habitats</label>
+                  <input (change)="onFileChanged($event)"
+                         class="upload"
+                         formControlName="vues"
+                         multiple
+                         name='vues'
+                         type="file">
+
+                </div>
+              </div>
+            </div>
+            <!-- end right part form -->
+          </div>
+            <div class="row mt-md-5">
+              <div class="col-md-12 text-center">
+                <button [disabled]="!habitatForm.valid" class="btn btnOrange w-25"><i class="fas fa-plus-circle"></i>
+                  Modifier les informations
+                </button>
+              </div>
+            </div>
+          </div>
+        <!--end text part -->
+
+    <!--start images part -->
+    <div class="bg-white p-3 mt-3">
+      <h3 class="admin-title-section mb-4 h3" style="display: inline-block"> Images </h3>
+      <div class="row ">
+        <div class="ml-5 col-md-3  mb-3 " *ngFor="let image of  habitatToModifyImg ">
+          <i class="fas fa-trash-alt fa-2x deleteImageIcon text-danger font-weight-bold" title="supprimer cette image" (click)="deleteHabitatImage(image.id)"></i>
+          <img class="img-fluid imageHabitat fade show" src="{{imageBaseUrl + image?.lienImage}}" width="800" height="300" alt=""/>
+          <div class="bg-admin-base text-center p-2" *ngIf="image.legende">
+            {{image?.legende}}}
+          </div>
+        </div>
+      </div>
+
+      <!-- start success image deleted notification-->
+      <div class="d-flex justify-content-center bg-white p-3" *ngIf="successNotificationImgSuppr">
+        <div class="alert alert-success alert-dismissible fade show w-50 text-dark" role="alert"
+             (click)="resetNotification('successNotificationImgSuppr')">
+          {{successNotificationImgSuppr}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+      <!-- end success image deleted notification-->
+
+      <!-- start error image deleted notification-->
+      <div class="d-flex justify-content-center bg-white p-3" *ngIf="errorNotificationImgSuppr">
+        <div class="alert alert-danger alert-dismissible text-dark fade show w-50" role="alert"
+             (click)="resetNotification('errorNotificationImgSuppr')">
+          {{errorNotificationImgSuppr}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true" >&times;</span>
+          </button>
+        </div>
+      </div>
+      <!-- end error image deleted notification-->
+    </div>
+
+    <!--end image part -->
+    </form>
+  </div>
+</section>
+<!-- Button trigger modal -->

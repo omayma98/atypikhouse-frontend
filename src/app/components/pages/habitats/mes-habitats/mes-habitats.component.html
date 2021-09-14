@@ -1,0 +1,51 @@
+<section class="pager-sec bfr mb-5">
+  <div class="container">
+    <div class="pager-sec-details d-flex justify-content-center justify-content-sm-between  flex-wrap align-items-center">
+      <h1 class="text-white">Mes habitats</h1>
+      <ul>
+        <li><a routerLink="/accueil" title="">Accueil</a></li>
+        <li><span>Se connecter</span></li>
+      </ul>
+    </div><!--pager-sec-details end-->
+  </div>
+</section>
+
+<section class="page-main-content mb-5" *ngIf="!allHabitats.length">
+  <div class="container bg-white p-3  py-5 text-center">
+    Aucun habitat trouvé !
+  </div>
+</section>
+
+<section class="page-main-content mb-5" *ngIf="allHabitats.length">
+  <div class="container bg-white p-3">
+    <table datatable [dtOptions]="dtOptions"  [dtTrigger]="dtTrigger" class=" table table-bordered hover">
+      <thead>
+      <tr>
+        <th class="full-center">N°</th>
+        <th class="full-center">Titre</th>
+        <th class="full-center">Type</th>
+        <th class="full-center">Statut</th>
+        <th class="full-center">Date ajout</th>
+        <th class="full-center">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let habitat of allHabitats;let i = index;">
+        <td class="full-center"> {{i+1}} </td>
+        <td class="full-center">{{habitat.title}}</td>
+        <td class="full-center">{{habitat.typeHabitat}}</td>
+        <td class="full-center">{{ habitat.valideParAtypik ? "Validé" : "En attente de validation"}}</td>
+        <td class="full-center">{{habitat.created_at}}</td>
+        <td class="full-center">
+          <a [routerLink]="['details-habitat', habitat.id]" class="mr-md-3">
+            <button class="btn btn-sm btnOrange"> <i class="fas fa-eye"></i> Voir les détails</button>
+          </a>
+          <a [routerLink]="['modifier-habitat', habitat.id]" >
+            <button class="btn btn-sm btnBlue"> <i class="fas fa-edit"></i> Modifier </button>
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

@@ -1,0 +1,47 @@
+<section class="pager-sec bfr mb-5">
+  <div class="container">
+    <div class="pager-sec-details d-flex justify-content-center justify-content-sm-between  flex-wrap align-items-center">
+      <h1 class="text-white">Se connecter</h1>
+      <ul>
+        <li><a routerLink="/accueil" title="">Accueil</a></li>
+        <li><span>Se connecter</span></li>
+      </ul>
+    </div><!--pager-sec-details end-->
+  </div>
+</section>
+
+<div class="container d-flex justify-content-center align-items-center my-5">
+  <div class="col-md-6 bg-light p-5">
+    <span *ngIf="successNotification" class="d-block alert alert-success mt-3"> {{ successNotification }} </span>
+    <div class="auth-wrapper">
+        <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <!-- Errors -->
+            <div *ngIf="serverValidationErrors?.email" class="alert alert-danger mt-3">
+              {{ errors?.validationErrors?.email }}
+            </div>
+            <div *ngIf="serverValidationErrors?.password" class="alert alert-danger mt-3">
+              {{ serverValidationErrors.password }}
+            </div>
+            <div *ngIf="errorNotification" class="alert alert-danger mt-3">
+             {{ errorNotification }}
+            </div>
+
+
+          <!-- Login -->
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" formControlName="email" name="email">
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control"  formControlName="password" name="password">
+          </div>
+
+          <div class="form-group col-md-12 d-flex justify-content-center">
+            <button type="submit" class="btn w-50 btn-primary">Se connecter</button>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>

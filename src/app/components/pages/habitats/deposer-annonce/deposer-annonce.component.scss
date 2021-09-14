@@ -1,0 +1,27 @@
+.equipements input {
+  height: initial;
+  width: 20px;
+  display: inline-block;
+}
+
+input.upload {
+  height: initial;
+  padding: 1rem;
+}
+
+.apply-from .alert-success {
+  position: relative;
+  top: initial;
+  transform: none;
+  opacity: 1;
+  visibility: visible;
+  z-index: initial;
+  width: 100%;
+  text-align: center;
+  background-color: #58c973;
+
+}
+
+textarea {
+  height: 175px;
+}
